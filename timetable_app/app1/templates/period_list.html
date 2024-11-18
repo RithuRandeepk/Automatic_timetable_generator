@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% block cards %}
+ 
+<div style="position:fixed;margin-top: 68px;background-color: white;margin-left: 290px; width: 500px;">
+    <h1>Period List</h1>
+<a href="{% url 'add_period' %}">Add Period</a>
+<ul>
+    {% for period in period %}
+        <li>
+            {{ period.session_name }} :        {{ period.start_time }} - {{ period.end_time }}
+           
+
+        </li>
+    {% endfor %}
+</ul>
+
+</div>
+{% endblock %}
+
+
+
+   

@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% block cards %}
+ 
+<div style="position:fixed;margin-top: 68px;margin-left:290px;background-color: white;">
+    <h2>Add Staff</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'staff_list' %}">Back to Staff List</a>
+
+
+</div>
+{% endblock %}
+
+
+
+   

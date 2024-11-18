@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+{% block cards %}
+ 
+<div style="position:fixed;margin-top: 68px;background-color: white;margin-left: 290px;width: 500px;">
+    <h2>Staff Members</h2>
+    <a href="{% url 'create_staff' %}">Add New Staff</a>
+    <ul>
+        {% for staff in staff_members %}
+            <li>
+                {{ staff.name }} | 
+                {% for subject in staff.subjects.all %}
+                {{ subject.subject_name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <br>
+                <a href="{% url 'update_staff' staff.pk %}">Edit</a> | 
+                <a href="{% url 'delete_staff' staff.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}
+
+
+
+   

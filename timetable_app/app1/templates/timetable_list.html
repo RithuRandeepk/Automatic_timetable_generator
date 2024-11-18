@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block cards %}
+<div style="position: fixed; margin-top: 68px; background-color: white; margin-left: 290px; width: calc(100% - 290px);">
+    <h1>{{ course.course_name }} Timetable</h1>
+    <style>
+        .table-container {
+            max-height: 500px; 
+            overflow-y: auto;  /* Enables vertical scrolling */
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* Light border for a cleaner look */
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50; /* Green header background */
+            color: white; /* White text color */
+            position: sticky;
+            top: 0; /* Keep table headers fixed at the top when scrolling */
+            z-index: 1;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra striping for even rows */
+        }
+
+        tr:hover {
+            background-color: #ddd; /* Highlight row on hover */
+        }
+
+        .table-title {
+            font-size: 24px; /* Title font size */
+            margin-bottom: 10px; /* Space between title and table */
+        }
+
+        .period-time {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .staff-name {
+            font-style: italic;
+        }
+
+    </style>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Period</th>
+                    <th>Subject</th>
+                    <th>Staff</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in timetable|slice:":20" %}
+                <tr>
+                    <td>{{ entry.day.day_name }}</td>
+                    <td class="period-time">{{ entry.period.start_time|time:"H:i" }} - {{ entry.period.end_time|time:"H:i" }}</td>
+                    <td>{{ entry.subject.subject_name }}</td>
+                    <td class="staff-name">{{ entry.staff.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+{% block cards %}
+ 
+<div style="position:fixed;margin-top: 68px;background-color: white;margin-left: 290px; width: 500px;">
+    <h1>Course List</h1>
+<a href="{% url 'create_course' %}">Add New Course</a>
+<ul>
+    {% for course in courses %}
+        <li>
+            {{ course.course_name }} - 
+            <a href="{% url 'update_course' course.pk %}">Edit</a> | 
+            <a href="{% url 'generate_timetable' course.id %}">Generate Timetable</a>
+            <br>
+            <a href="{% url 'timetable_list' course.id %}">View Timetable</a>
+            <form action="{% url 'delete_course' course.pk %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn btn-sm"  type="submit" style="width: 90px;height: 40px;">Delete</button>
+            </form>
+            <br>
+            <br>
+            
+        </li>
+    {% endfor %}
+</ul>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</div>
+{% endblock %}
+
+
+
+   

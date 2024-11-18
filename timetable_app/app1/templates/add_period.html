@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block cards %}
+
+<div style="position:fixed;margin-top: 65px;margin-left:290px;background-color:  white;">
+
+    <h1>{{ "Add Period" }}</h1>
+    <form method="post" style="width: 500px;">
+        {% csrf_token %}
+        {{ form.as_p }}  
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'list_period' %}" style="margin-top: 20px; display: block;">Back to Period List</a>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</div>
+
+{% endblock %}
